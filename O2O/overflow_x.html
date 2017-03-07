@@ -10,13 +10,36 @@
 			margin: 0px;
 			padding: 0px;
 		}
+		.links{
+			position: fixed;
+			left:0px;
+			top:0px;
+		}
+		.links a{
+			display: inline-block;
+			width: 150px;
+			height: 40px;
+			line-height: 40px;
+			background: rgba(0,0,0,.5);
+			color：white;
+			text-align: center;
+			text-decoration: none;
+		}
 	</style>
 	
 </head>
 <body>
+<div class="links">
+	<a href="#nav1">nav1</a>
+	<a href="#nav2">nav2</a>	
+	<a href="#nav3">nav3</a>	
+</div>
+</div>
+
 	<div style="width: 22300px;height: 100%;overflow: hidden;background: #eee" id="test">
-		<div style="width: 1500px;background: green;height: 100%;float: left;"></div>
-		<div style="width: 1500px;background: blue;height: 100%;float: left;"></div>
+		<div id="nav1" style="width: 1500px;background: green;height: 100%;float: left;"></div>
+		<div id= "nav2" style="width: 1500px;background: blue;height: 100%;float: left;"></div>
+		<div id= "nav3" style="width: 1500px;background: red;height: 100%;float: left;"></div>
 	</div>
 	<script src="lib/jquery.js"></script>
 	<script src="lib/jquery.mousewheel.min.js"></script>
@@ -26,6 +49,7 @@
           var scrollLeft = this.scrollLeft;
           this.scrollLeft = (scrollLeft+ ((event.deltaY * event.deltaFactor) * -1));
           //console.log(event.deltaY, event.deltaFactor, event.originalEvent.deltaMode, event.originalEvent.wheelDelta);
+
         });
 	</script>
 </body>
