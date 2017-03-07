@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="content-type" content="text/heml;charset=UTF-8">
+<style type="text/css">
+	#headTable{border:1px solid #000000;border-bottom:none;border-collapse:collapse;width:274px;}
+	#headTd1{width:50%;text-align:right;vertical-align:bottom;font-size:14px;line-height:16px;}
+	#headTd2{width:50%;line-height:16px;text-align:left;}
+	#headInput{width:50%;height:16px;padding:0 2px;;border:0;outline:none;}
+	.headCloseTd{font:12px tahoma bold;padding:0 12px;}
+	.headCloseTd:hover{background:red;color:white;cursor:pointer;}
+	#headCloseX{float:right;}
+	#bodyTable{border:1px solid #000000;border-collapse:collapse;cursor:pointer;}
+	#bodyTable tr{height:12px;}
+	#bodyTable td{width:12px;border:1px solid #000000}
+</style>
+</head>
+<body>
+<label style="font-family:microsoft YaHei,tahoma;font-size:14px">选择颜色：</label>
+<img id="colorimg" style="width:16px;height:16px;vertical-align:text-bottom"/>
+<div id="colorpane" style="display:none;width:274px"></div>
+ 
+<script type="text/javascript">
+var colorimg=document.getElementById("colorimg");
+var colorPane=document.getElementById("colorpane");
+var ColorHex=new Array('00','33','66','99','CC','FF');
+var SpColorHex=new Array('FF0000','00FF00','0000FF','FFFF00','00FFFF','FF00FF');
+var current=null;
+ 
+window.onload=function(){
+	/*color box head*/
+	var colorTable='<table id="headTable" cellspacing="0" cellpadding="0"> '
+		+'<tr>'
+			+'<td id="headTd1">#</td>'
+			+'<td id="headTd2">'
+				+'<input id="headInput" onkeydown="return keydown(event,this)" onkeyup="keyup(this)"/>'
+			+'</td>'
+			+'<td class="headCloseTd" onclick="closePane()">'
+				+'<span id="headCloseX">X</span>'
+			+'</td>'
+		+'</tr>'
+	+'</table>';
+	/*color box body*/
+	colorTable +='<table id="bodyTable" cellspacing="0" cellpadding="0">';
+	for (i=0;i<2;i++){
+	  for (j=0;j<6;j++){
+	    colorTable +='<tr><td onclick=changecolor(#000000) style="background:#000000"></td>';
+	    /*灰度色：用相等的三原色值混合*/
+	    if (i==0) colorTable +='<td onclick=changecolor("#'+ColorHex[j]+ColorHex[j]+ColorHex[j]+'") style="background:#'+ColorHex[j]+ColorHex[j]+ColorHex[j]+'"></td>';
+	    /*任意选一种或两种原色混合*/
+	    else colorTable +='<td onclick=changecolor("#'+SpColorHex[j]+'") style="background:#'+SpColorHex[j]+'"></td>';
+	    colorTable +='<td onclick=changecolor("#000000") style="background:#000000"></td>';
+	    for (k=0;k<3;k++){ 
+        for (l=0;l<6;l++){
+          colorTable +='<td onclick=changecolor("#'+ColorHex[k+i*3]+ColorHex[l]+ColorHex[j]+'") style="background:#'+ColorHex[k+i*3]+ColorHex[l]+ColorHex[j]+'">';
+        }
+	    }
+	  }
+	}
+	colorTable +='</table>';
+	colorpane.innerHTML =colorTable;
+}
+ 
+/*触发颜色选择器*/
+colorimg.onclick=function(){
+	colorPane.style.display="block";
+}
+ 
+/*关闭颜色选择器*/
+function closePane(){
+	colorPane.style.display="none";
+}
+ 
+/*英文键盘输入触发*/
+function keydown(event,input){
+	var code =event.which;
+	if(code ==8 ||code ==37 || code ==39 || code ==46) return true;
+	if(
+		(input.value.length >=6) ||
+		(event.shiftKey && code >=48 && code <=57) ||
+		(!/[0-9a-fA-F]/.test(String.fromCharCode(code)))
+	) return false;
+}
+ 
+ 
+/*是否完成颜色输入？*/
+function keyup(e){
+	var v_ascii =e.value.replace(/[^0-9a-fA-F]/g,"");
+	var v_upper =e.value.toUpperCase();
+	var pos =e.selectionStart;
+	/*中文输入法输入检测、自动大写*/
+	if(e.value !=v_ascii || e.value !=v_upper) {
+		if(e.value !=v_ascii) {
+			e.value =v_ascii;
+			pos -=1;
+		}
+		else e.value =v_upper;
+		e.setSelectionRange(pos,pos);
+	}
+	if(e.value.length ==6) colorimg.style.background="#" +e.value;
+}
+ 
+/*控制颜色改变*/
+function changecolor(color){
+	colorimg.style.background=color;
+	var textinput =document.getElementById("headInput");
+	textinput.value =color.substr(1);
+	textinput.focus();
+}
+ 
+</script>
+</body>
+</html>
