@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>沿着特定的轨道旋转</title>
+</head>
+<body>
+<style>
+body{
+	background: blue;
+}
+	.tiny-planet{
+		width: 800px;
+		height: 800px;
+		background: url("img/track.png") 0px 0px no-repeat;
+		position: relative;
+		margin: 0px auto;
+	}
+	.planet{
+		position: absolute;
+	    border-radius: 50%;
+	    background-color: #fff;
+		
+	}
+	.planet-1{
+	    width: 10px;
+	    height: 10px;
+	    margin-top: -5px;
+	    margin-left: -5px;	
+        left: 50%;	
+        top:50%;    
+	}
+	.active .planet-1{
+		-webkit-animation: rot 10s infinite linear;
+		animation: rot 10s infinite linear;
+	}
+	.active .planet-2{
+		-webkit-animation:rot-inner 6s infinite linear;
+		animation: rot-inner 6s infinite linear;
+	}
+	.active .planet-3{
+		-webkit-animation:rot-back 34s infinite linear;
+		animation: rot-back 34s infinite linear;
+	}
+	.active .planet-4{
+		-webkit-animation:rot-back-inner 8s infinite linear;
+		animation: rot-back-inner 8s infinite linear;
+	}
+	.active .planet-5{
+		-webkit-animation:rot-inner 28s infinite linear;
+		animation: rot-inner 28s infinite linear;
+	}
+	.planet-2{
+		position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    width: 10px;
+	    height: 10px;
+	    margin-top: -5px;
+	    margin-left: -5px;
+
+	}
+	.planet-3{
+		position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    width: 10px;
+	    height: 10px;
+	    margin-top: -5px;
+	    margin-left: -5px;
+	}
+	.planet-4{
+		position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    width: 6px;
+	    height: 6px;
+	    margin-top: -3px;
+	    margin-bottom: -3px;
+	}
+	.planet-5{
+		position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    width: 10px;
+	    height: 10px;
+	    margin-top: -5px;
+	    margin-left: -5px;
+	}
+	@-webkit-keyframes infinite-spinning {
+	    0% {
+	        -webkit-transform: rotate(0deg);
+	        transform: rotate(0deg)
+	    }
+
+	    to {
+	        -webkit-transform: rotate(1turn);
+	        transform: rotate(1turn)
+	    }
+}
+
+@keyframes infinite-spinning {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+
+    to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn)
+    }
+}
+@-webkit-keyframes back-infinite-spinning {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+
+    to {
+        -webkit-transform: rotate(-1turn);
+        transform: rotate(-1turn)
+    }
+}
+
+@keyframes back-infinite-spinning {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+
+    to {
+        -webkit-transform: rotate(-1turn);
+        transform: rotate(-1turn)
+    }
+}
+
+@-webkit-keyframes rot {
+    0% {
+        -webkit-transform: rotate(0deg) translate(-400px) rotate(0deg);
+        transform: rotate(0deg) translate(-400px) rotate(0deg)
+    }
+
+    to {
+        -webkit-transform: rotate(1turn) translate(-400px) rotate(-1turn);
+        transform: rotate(1turn) translate(-400px) rotate(-1turn)
+    }
+}
+
+@keyframes rot {
+    0% {
+        -webkit-transform: rotate(0deg) translate(-400px) rotate(0deg);
+        transform: rotate(0deg) translate(-400px) rotate(0deg)
+    }
+
+    to {
+        -webkit-transform: rotate(1turn) translate(-400px) rotate(-1turn);
+        transform: rotate(1turn) translate(-400px) rotate(-1turn)
+    }
+}
+
+@-webkit-keyframes rot-back {
+    0% {
+        -webkit-transform: rotate(1turn) translate(-400px) rotate(-1turn);
+        transform: rotate(1turn) translate(-400px) rotate(-1turn)
+    }
+
+    to {
+        -webkit-transform: rotate(0deg) translate(-400px) rotate(0deg);
+        transform: rotate(0deg) translate(-400px) rotate(0deg)
+    }
+}
+
+@keyframes rot-back {
+    0% {
+        -webkit-transform: rotate(1turn) translate(-400px) rotate(-1turn);
+        transform: rotate(1turn) translate(-400px) rotate(-1turn)
+    }
+
+    to {
+        -webkit-transform: rotate(0deg) translate(-400px) rotate(0deg);
+        transform: rotate(0deg) translate(-400px) rotate(0deg)
+    }
+}
+
+@-webkit-keyframes rot-inner {
+    0% {
+        -webkit-transform: rotate(0deg) translate(-364px) rotate(0deg);
+        transform: rotate(0deg) translate(-364px) rotate(0deg)
+    }
+    to {
+        -webkit-transform: rotate(1turn) translate(-364px) rotate(-1turn);
+        transform: rotate(1turn) translate(-364px) rotate(-1turn)
+    }
+}
+
+@keyframes rot-inner {
+    0% {
+        -webkit-transform: rotate(0deg) translate(-364px) rotate(0deg);
+        transform: rotate(0deg) translate(-364px) rotate(0deg)
+    }
+
+    to {
+        -webkit-transform: rotate(1turn) translate(-364px) rotate(-1turn);
+        transform: rotate(1turn) translate(-364px) rotate(-1turn)
+    }
+}
+
+@-webkit-keyframes rot-back-inner {
+    0% {
+        -webkit-transform: rotate(1turn) translate(-364px) rotate(-1turn);
+        transform: rotate(1turn) translate(-364px) rotate(-1turn)
+    }
+
+    to {
+        -webkit-transform: rotate(0deg) translate(-364px) rotate(0deg);
+        transform: rotate(0deg) translate(-364px) rotate(0deg)
+    }
+}
+
+@keyframes rot-back-inner {
+    0% {
+        -webkit-transform: rotate(1turn) translate(-364px) rotate(-1turn);
+        transform: rotate(1turn) translate(-364px) rotate(-1turn)
+    }
+
+    to {
+        -webkit-transform: rotate(0deg) translate(-364px) rotate(0deg);
+        transform: rotate(0deg) translate(-364px) rotate(0deg)
+    }
+}
+</style>
+<div class="item active">
+	<div class="content">					
+		<div class="tiny-planet">
+			<span class="planet planet-1"></span> 
+			<span class="planet planet-2"></span> 
+			<span class="planet planet-3"></span> 
+			<span class="planet planet-4"></span> 
+			<span class="planet planet-5"></span>
+		</div>		
+	</div>
+</div>
+</body>
+</html>
