@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>指令</title>
+	<script src="lib/angular.min.js"></script>
+</head>
+<body>
+<p>对不同的控制器加载不同的方法,指令的复用，调用控制器的方法</p>
+<div ng-controller="myctrl">
+	<loader howToLoad="loadData()">移动加载</loader>	
+</div>
+<div ng-controller="myctrl2">
+	<loader howToLoad="loadData2()">移动加载</loader>	
+</div>
+	
+<script>
+	var myapp=angular.module("myApp",[]);
+	myapp.controller('myctrl', ['$scope', function($scope){
+		$scope.loadData=function(){
+			console.log("加载中...111");
+		}
+	
+	}])
+	myapp.controller('myctrl2', ['$scope', function($scope){
+		$scope.loadData2=function(){
+			console.log("加载中...222");
+		}
+	
+	}])
+	myapp.directive('loader',  function(){
+		// Runs during compile
+		return {
+			restrict:"AE",
+			link: function(scope, elem, attrs, controller) {
+				elem.bind("mouseenter",function(event){
+					//scope.loadData();
+					scope.$apply(attrs.howtoload)
+				})
+			}
+		};
+	});
+</script>
+</body>
+</html>

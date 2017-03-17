@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="selectExample">
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>selectas</title>
+        <script src="../angular-1.3.0.14/angular.js"></script>
+        <script type="text/javascript">
+        angular.module('selectExample', [])
+        .controller('ExampleController', ['$scope', function ($scope) {
+        $scope.users = [
+        { name: 'a', id: '1' },
+        { name: 'b', id: '2' },
+        { name: 'c', id: '3' }
+        ];
+        $scope.selected = '2';//id的值，区分类型
+        }]);
+        </script>
+</head>
+<body ng-controller="ExampleController">
+        <select ng-model="selected" ng-options="x.id as x.name for x in users"></select>
+</body>
+</html>

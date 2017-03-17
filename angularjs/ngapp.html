@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>ngapp测试</title>
+	<script src="lib/angular.min.js"></script>
+</head>
+<body>
+<div ng-controller="myctrl">
+	{{test1}}
+</div>
+<div ng-controller="test2">
+	{{test2}}
+</div>
+	<script>
+		//angular.module("select",[]);
+		var myapp=angular.module("myapp",['select']);
+		var select=angular.module("select",[]);
+		myapp.controller('myctrl', ['$scope', function($scope){
+			$scope.test1="test1";
+		}])
+		select.controller('test2', ['$scope', function($scope){
+			$scope.test2="test2"
+			
+		}])
+		
+	</script>
+</body>
+</html>

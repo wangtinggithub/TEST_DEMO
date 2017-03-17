@@ -1,0 +1,17 @@
+h1 div {
+  coloe: red; }
+
+h2 {
+  border-top: 9px; }
+
+.class1, .class2 {
+  border: 1px solid #ddd; }
+
+.class2 {
+  font-size: 120%; }
+
+div {
+  margin-left: 5px;
+  float: left; }
+
+/*# sourceMappingURL=longshadow.css.map */

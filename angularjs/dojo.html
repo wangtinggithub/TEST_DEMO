@@ -1,0 +1,42 @@
+<html>
+<head ng-app="dojotest">
+    <title>Exploring Dojo</title>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+<h1 ng-bind="test"></h1>
+<h1 id="greeting">Hello</h1>  
+    <!-- load Dojo -->  
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"  
+            data-dojo-config="async: true"></script>  
+  
+    <script>  
+        require([  
+            'dojo/dom',  
+            'dojo/dom-construct'  
+        ], function (dom, domConstruct) {  
+            var greetingNode = dom.byId('greeting');  
+            domConstruct.place('<em> Dojo!</em>', greetingNode);  
+        });  
+    </script>  
+<script src="//ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js">
+</script>
+<script>
+<script>
+var app = angular.module("dojotest", ['ngSanitize']);
+app.controller("myCtrl", function($scope) {
+    $scope.test = "nihao";
+});
+</script>
+dojo.addOnLoad(function() {
+    dojo.create(
+        "div",
+        {
+            "innerHTML": "Hello, World!"
+        },
+        dojo.body()
+    );
+});
+</script>
+</body>
+</html>

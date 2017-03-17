@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="dateInputExample">
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>date例子</title>
+        <script src="lib/angular.min.js"></script>
+        <script type="text/javascript">
+        angular.module('dateInputExample', [])
+        .controller('DateController', ['$scope', function ($scope) {
+        $scope.value = new Date(2013, 9, 22);
+        }]);
+        </script>
+</head>
+<body>
+        <form name="myForm" ng-controller="DateController as dateCtrl">
+        Pick a date in 2013:
+        <input type="date" id="exampleInput" name="input" ng-model="value"
+        placeholder="yyyy-MM-dd" min="2013-01-01" max="2015-12-22" required />
+        <span class="error" ng-show="myForm.input.$error.required">
+            Required!
+        </span>
+        <span class="error" ng-show="myForm.input.$error.date">
+            Not a valid date!
+        </span>
+        <span class="error" ng-show="myForm.input.$error.max">
+            max
+        </span>
+        <span class="error" ng-show="myForm.input.$error.min">
+            min
+        </span>
+        <br />
+        <tt>value = {{value | date: "yyyy-MM-dd"}}</tt><br />
+        <tt>myForm.input.$valid = {{myForm.input.$valid}}</tt><br />
+        <tt>myForm.input.$error = {{myForm.input.$error}}</tt><br />
+        <tt>myForm.$valid = {{myForm.$valid}}</tt><br />
+        <tt>myForm.$error.required = {{!!myForm.$error.required}}</tt><br />
+        </form>
+</body>
+</html>

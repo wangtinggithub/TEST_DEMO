@@ -1,0 +1,49 @@
+<html ng-app="myApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="lib/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="myctrl">
+        {{test}}
+    </div>
+    <script type="text/javascript">
+         var myAppModule = angular.module("myApp",[]);
+         myAppModule.controller("myctrl",["$scope","$q",function($scope, $q ){
+            function okToGreet(name){
+                console.log("okToGreet"+name);
+            }
+            function asyncGreet(name) {  
+              var deferred = $q.defer();  
+               
+              setTimeout(function() {  
+                // 因为此function 在未来的事件循环中异步执行,  
+                // 我们需要把代码包装到到一个 $apply 调用中,以便正确的观察到 model 的改变  
+                $scope.$apply(function() {  
+                  deferred.notify('即将问候 ' + name + '.');  
+               
+                  if (okToGreet) {  
+                    deferred.resolve('你好, ' + name + '!');  
+                  } else {  
+                    deferred.reject('拒绝问候 ' + name + ' .');  
+                  }  
+                });  
+              }, 1000);  
+               
+              return deferred.promise;  
+            }  
+               
+            var promise = asyncGreet('小漠漠');  
+            promise.then(function(greeting) {  
+              alert('成功: ' + greeting);  
+            }, function(reason) {  
+              alert('失败鸟: ' + reason);  
+            }, function(update) {  
+              alert('收到通知: ' + update);  
+            });  
+
+
+         }]);
+    </script>
+</body>
+</html>

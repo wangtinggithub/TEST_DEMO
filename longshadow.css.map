@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACE,MAAG;EACH,KAAK,EAAC,GAAG;;AAIX,EAAE;EAEE,UAAG,EAAC,GAAG;;AAGX,gBAAO;EACL,MAAM,EAAC,cAAc;;AAEvB,OAAO;EAEL,SAAS,EAAC,IAAI;;AAMhB,GAAG;EAHD,WAAW,EAAC,GAAG;EACf,KAAK,EAAC,IAAI",
+"sources": ["longshadow.scss"],
+"names": [],
+"file": "longshadow.css"
+}

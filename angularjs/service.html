@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>service</title>
+	  <script src="lib/angular.min.js"></script>
+</head>
+<body ng-controller="myctrl">
+	<div ng-repeat="user in users">
+		{{user.name}}
+	</div>
+	<script>
+		var myapp=angular.module("myapp",[]);
+		myapp.service("userListService",['$http',function($http){
+			var doRequest=function(){
+				return $http({
+					method:"get",
+					url:"data.json"
+				})
+			}
+			return {
+				userlist:doRequest
+			}
+		}])
+		
+		myapp.controller('myctrl', ['$scope','userListService', function($scope,userListService){
+			
+			userListService.userlist().then(function(data){
+				$scope.users=data.data;
+			},function(error){
+				console.log(error);
+			});
+		}])
+
+		
+	</script>
+</body>
+</html>

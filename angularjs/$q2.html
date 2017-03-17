@@ -1,0 +1,31 @@
+<html ng-app="myApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="lib/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="myctrl">
+        {{test}}
+    </div>
+    <script type="text/javascript">
+         var myAppModule = angular.module("myApp",[]);
+         myAppModule.controller("myctrl",["$scope","$q",function($scope, $q ){
+            $scope.test = 1;//这个只是用来测试angularjs是否正常的，没其他的作用
+
+            var fun1=function(){
+                console.log(1);
+                return 1;
+            }
+            var fun2=function(){
+                console.log(2);
+                return 2;
+            }
+            $q.all([fun1(),fun2()])
+            .then(function(result){
+                console.log(result);
+            })
+            //1 2 [1,2]
+         }]);
+    </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>TABS</title>
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="lib/angular.min.js"></script>
+</head>
+<body>
+<style>
+	.tab{
+		border-radius: 10px;
+		border:1px solid green;
+		overflow: hidden;
+	}
+	.tabNav{
+		overflow: hidden;
+	}
+	.tabNav ul{
+		list-style: none;
+		margin: 0px;
+		padding: 0px;
+		
+	}
+	.tabNav ul li{
+		float: left;
+		height: 50px;
+		line-height: 50px;
+		padding: 0px 20px;
+		min-width: 50px;
+		box-sizing: border-box;
+		background: aqua;
+	}
+	.tabNav ul li.active{
+		background: #5fc72c
+	}
+	.tabcontainer div{
+		padding: 10px ;
+	}
+</style>
+<div ng-controller="myctrl">
+	<tabs gr-data='tabList' gr-id='tab1'></tabs>	
+	
+</div>
+<script type="text/ng-template" id="nav.html">
+	<div class="tab" id='grId'>
+		<nav class="tabNav">
+			<ul>
+			<li ng-repeat="tab in grData" ng-class='{active:$first}' >{{tab.title}}</li>
+				<!-- <li class="active">one</li>
+				<li ng-class="{active:select}">two</li>
+				<li ng-class="{active:select}">three</li> -->
+			</ul>
+		</nav>
+		<div class="tabcontainer">
+			<div ng-repeat="tab in grData" ng-style="{display:$first?'block':'none'}" >{{tab.text}}</div>
+			<!-- <div>这是列表2的内容</div>
+			<div>这是列表3的内容</div> -->
+		</div>
+	</div>
+</script>
+<script>
+	var myapp=angular.module("myapp",[]);
+	myapp.directive('tabs', function(){
+		// Runs during compile
+		return {
+			// name: '',
+			// priority: 1,
+			// terminal: true,
+			 scope: {
+			 	grData:"=",
+			 	grId:"@"
+			 }, // {} = isolate, true = child, false/undefined = no change
+			controller: function($scope, $element, $attrs, $transclude) {
+
+			},
+			// require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
+			 restrict: 'AE', // E = Element, A = Attribute, C = Class, M = Comment
+			// template: '',
+			 templateUrl: 'nav.html',
+			 replace: true,
+			 transclude: true,
+			// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
+			link: function($scope, iElm, iAttrs, controller) {
+				iElm.delegate("ul li","click",function(){
+					$(this).addClass("active").siblings().removeClass("active");
+					$(this).parents(".tab").find(".tabcontainer div").eq($(this).index()).show().siblings().hide();
+				})
+			}
+		};
+	});
+	myapp.controller('myctrl', ['$scope', function($scope){
+		$scope.activeId=1;
+		$scope.tabList=[
+		{
+			"title":"one",
+			"text":"这是列表1的内容"
+		},
+		{
+			"title":"two",
+			"text":"这是列表2的内容"
+		},
+		{
+			"title":"three",
+			"text":"这是列表3的内容"
+		},
+		]
+	}])
+</script>
+</body>
+</html>

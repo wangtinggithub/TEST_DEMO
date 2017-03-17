@@ -1,0 +1,25 @@
+h1{
+  div{
+  coloe:red;
+
+  }
+}
+h2{
+  border:{
+    top:9px;
+  }
+}
+.class1{
+  border:1px solid #ddd;
+}
+.class2{
+  @extend .class1;
+  font-size:120%;
+}
+@mixin left{
+  margin-left:5px;
+  float:left;
+}
+div{
+  @include left;
+}

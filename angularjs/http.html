@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="lib/angular.min.js"></script>
+</head>
+<body ng-controller="myctrl">
+	<div ng-repeat="user in users">
+		{{user.name}}
+	</div>
+	<script>
+		angular.module("myapp",[]).controller('myctrl', ['$scope','$http', function($scope,$http){
+			$http({
+				method:"get",
+				url:"data.json"
+			}).then(function(data){
+				$scope.users=data.data;
+			},function(error){
+				console.log(error);
+			}
+			)
+		}])
+	</script>
+</body>
+</html>

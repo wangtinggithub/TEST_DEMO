@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="listExample">
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>ngList例子</title>
+        <script src="lib/angular.min.js"></script>
+        <script type="text/javascript">
+        angular.module('listExample', [])
+.controller('ExampleController', ['$scope', function ($scope) {
+        $scope.names = ['morpheus', 'neo', 'trinity'];
+}]);
+        </script>
+</head>
+<body>
+        <form name="myForm" ng-controller="ExampleController">
+        List: <input name="namesInput" ng-model="names" ng-list required>
+        <span class="error" ng-show="myForm.namesInput.$error.required">
+            Required!
+        </span>
+        <br>
+        <tt>names = {{names}}</tt><br />
+        <tt>myForm.namesInput.$valid = {{myForm.namesInput.$valid}}</tt><br />
+        <tt>myForm.namesInput.$error = {{myForm.namesInput.$error}}</tt><br />
+        <tt>myForm.$valid = {{myForm.$valid}}</tt><br />
+        <tt>myForm.$error.required = {{!!myForm.$error.required}}</tt><br />
+        </form>
+        <textarea ng-model="list" ng-list="&#10;" ng-trim="false"></textarea>
+<pre>{{ list | json }}</pre>
+</body>
+</html>

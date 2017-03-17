@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>展开收起</title>
+	<script src="lib/angular.min.js"></script>
+</head>
+<body>
+<div ng-controller="myctrl">
+<according>
+	<expander ng-repeat="expander in expanders" expander-title='expander.title'>{{expander.text}}</expander>
+</according>	
+	
+</div>
+	<style>
+		.ex_title{
+			background: black;
+			color:white;
+		}
+	</style>
+	<script>
+		var app=angular.module("myapp",[]);
+		app.directive("according",function(){
+			return{
+				restrict:"AE",
+				replace:true,
+				transclude:true,
+				template:"<div ng-transclude></div>",
+				controller:function(){
+					var expanders=[];
+					this.addExpander=function(expander){
+						expanders.push(expander);
+					}
+					this.openExpanders=function(selectExpander){
+						angular.forEach(expanders,function(expander){
+							if(selectExpander!=expander){
+								expander.show=false;
+							}
+							
+						})
+					}
+				}
+				}
+			
+		})
+		app.directive('expander', function(){
+			// Runs during compile
+			return {
+					
+				 scope: {
+				 	title:"=expanderTitle"
+				 },
+				 restrict: 'AE', // E = Element, A = Attribute, C = Class, M = Comment
+				 require:"^according",
+				 template: '<div><div class="ex_title" ng-click="toggle()">{{title}}</div><div  ng-show="show" ng-transclude></div><div>',
+				// templateUrl: '',
+				 replace: true,
+				 transclude: true,
+				// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
+				link: function($scope, iElm, iAttrs, accordingCtrl) {
+					$scope.show=false;
+					accordingCtrl.addExpander($scope);
+					$scope.toggle=function(){
+						$scope.show=!$scope.show;
+						accordingCtrl.openExpanders($scope);
+					}
+				}
+			};
+		});
+		app.controller('myctrl', ['$scope', function($scope){
+			$scope.expanders=[
+				{
+					"title":"one",
+					"text":"这是列表一的内容"
+				},
+				{
+					"title":"two",
+					"text":"这是列表二的内容"
+				},
+				{
+					"title":"three",
+					"text":"这是列表三的内容"
+				}
+			];
+		}])
+	</script>
+</body>
+</html>
