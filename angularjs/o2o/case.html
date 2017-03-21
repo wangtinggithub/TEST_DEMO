@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../lib/angular.min.js"></script>
+
+</head>
+<body ng-controller="myctrl">
+	<div>
+		维护类型：
+		<ul>
+			<li ng-repeat="i in typeObj"><label ><input type="radio"  ng-model="$parent.type" name="type" value="{{i.id}}" ng-change="change($parent.type)">{{i.name}}</label></li>
+			<!-- <li><label ><input type="radio" ng-model="type" name="type" value="1">变动</label></li>
+			<li><label ><input type="radio" ng-model="type" name="type" value="2">处置</label></li> -->
+		</ul>
+	</div>
+	<p>{{typeObj[type].child.length}}</p>
+	<p>{{typeObj[type].child}}</p>
+	<div>
+		维护方式：
+		<select ng-model="check" ng-show="typeObj[type].child.length" ng-options="i.id as i.name for i in typeObj[type].child" >			
+		</select>
+		<!-- <select name="" id="" ng-model="whfs" ng-show="type==1">
+			
+			<option value="租赁" >租赁</option>
+			<option value="正常" >正常</option>
+			<option value="停用" >停用</option>
+			<option value="事故" >事故</option>
+			<option value="调转" >调转</option>
+			
+		</select>
+		<select name="" id=""  ng-show="type==2">
+			<option value="报废" >报废</option>
+			<option value="退场闲置" >退场闲置</option>
+			<option value="销售" >销售</option>
+		</select> -->
+	</div>
+	{{check}}
+	<script>
+		var app=angular.module("myapp",[]);
+		app.controller('myctrl', ['$scope', function($scope){
+			$scope.typeObj=[
+				{
+					id:0,
+					name:"维保",
+					child:[
+						{
+							"id":0,
+							"name":"维修保养"
+						}
+					]
+				},
+				{
+					id:1,
+					name:"变动",
+					child:[
+						{
+							"id":1,
+							"name":"租赁"
+						},
+						{
+							"id":2,
+							"name":"正常"
+						},
+						{
+							"id":3,
+							"name":"停用"
+						},
+						{
+							"id":4,
+							"name":"事故"
+						},
+						{
+							"id":5,
+							"name":"调转"
+						}
+
+					]
+				},
+				{
+					id:2,
+					name:"处置",
+					child:[
+						{
+							"id":6,
+							"name":"报废"
+						},
+						{
+							"id":7,
+							"name":"退场闲置"
+						},
+						{
+							"id":8,
+							"name":"销售"
+						}
+
+					]
+				}
+			]
+			$scope.type=0;
+
+			$scope.check=$scope.typeObj[$scope.type].child[0]["id"];
+			$scope.change=function(type){
+				$scope.check=$scope.typeObj[type].child[0]["id"];
+			}
+
+		}])
+
+	</script>
+</body>
+</html>
