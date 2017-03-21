@@ -15,8 +15,6 @@
 			<li><label ><input type="radio" ng-model="type" name="type" value="2">处置</label></li> -->
 		</ul>
 	</div>
-	<p>{{typeObj[type].child.length}}</p>
-	<p>{{typeObj[type].child}}</p>
 	<div>
 		维护方式：
 		<select ng-model="check" ng-show="typeObj[type].child.length" ng-options="i.id as i.name for i in typeObj[type].child" >			
