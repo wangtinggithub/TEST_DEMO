@@ -1,0 +1,9 @@
+<form name="outterForm">
+  <ng-form name="innerForm">
+    <!--声明其为必填项 required必填-->
+    <input type="text" ng-model="username" ng-required="true" ng-if="false" disabled="disabled" />
+    <input type="submit" ng-click="inner()" ng-disabled="!innerForm.$valid"/>
+  </ng-form>
+  <!--声明外围表单的提交按钮，验证合法性-->
+  <input type="submit" ng-disabled="!outterForm.$valid" ng-click="outer()"/>
+</form> 

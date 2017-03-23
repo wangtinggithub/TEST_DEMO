@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="../lib/angular.min.js"></script>
+
+</head>
+<body ng-controller="myctrl">
+<div ng-include="'ngIncludeTemplate.html'" ></div>
+  <script>
+    var app=angular.module("myapp",[]);
+    app.controller('myctrl', ['$scope', function($scope){
+      $scope.inner=function(){
+        alert("innner")
+      }
+      $scope.outer=function(){
+        alert("outer")
+      }
+    }])
+
+  </script>
+</body>
+</html>

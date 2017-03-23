@@ -1,0 +1,113 @@
+<!DOCTYPE html >
+<html lang="en" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../lib/angular.min.js"></script>
+	<script src="../lib/jquery.js"></script>
+	<style>
+		.tableList *:disabled{
+			background: white;
+			border:none;
+
+		}
+	</style>
+</head>
+<body ng-controller="myctrl">
+<p>
+	{{bylists.length}}
+</p>
+	<div class="row" style="margin-top:20px;">				
+		<p class="actual">实际维修项目*：</p>
+		<button class="actualButton" title="新增" ng-click="add(bylists)">+</button>
+	</div>
+	<div class="tableList" style="margin-top:5px;" ng-if="bylists.length>=1">
+		<table  border="1" class="actualTable">
+			<thead>
+				<tr>
+					<th>更换修配件名称</th>
+					<th>数量</th>
+					<th>单价(元)</th>
+					<th>金额(元)</th>
+					<th>工时费(元)</th>
+					<th>备注</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="bylist in bylists" >
+					<td><input type="text" ng-model="bylist.name" ng-disabled="{{bylist.edit}}"></td>
+					<td><input type="number" ng-model="bylist.number" ng-disabled="{{bylist.edit}}"></td>
+					<td><input type="number" ng-model="bylist.unitPrice" ng-disabled="{{bylist.edit}}"></td>
+					<td><input type="text"  value="{{bylist.number*bylist.unitPrice==0?null:bylist.number*bylist.unitPrice}}"  ng-disabled="{{bylist.edit}}"></td>
+					<td><input type="number" ng-model="bylist.hourCost" ng-disabled="{{bylist.edit}}"></td>
+					<td><input type="text" ng-model="bylist.remarks" ng-disabled="{{bylist.edit}}"></td>
+					<td>
+						<button type="button" class="actualButton" title="删除" ng-click="delete(bylists,$index)">-</button>
+					</td>
+				</tr>
+				<!-- <tr>
+											<td><input type="text"></td>
+											<td><input type="text"></td>
+											<td><input type="text"></td>
+											<td><input type="text"></td>
+											<td><input type="text"></td>
+											<td><input type="text"></td>
+											<td>
+												<button type="button" class="actualButton" title="删除">-</button>
+											</td>
+										</tr>	 -->						
+			</tbody>
+		</table>
+	</div>
+	 <script>
+    var app=angular.module("myapp",[]);
+    app.controller('myctrl', ['$scope', function($scope){
+    	$scope.name="wangting";
+      $scope.byListObj=[
+      {
+      	"name":"RFID读卡器",
+      	"number":1,
+      	"unitPrice":100,
+      	"hourCost":50,
+      	"remarks":"零更换"
+      },
+ 	{
+      	"name":"RFID读卡器",
+      	"number":1,
+      	"unitPrice":100,
+      	"hourCost":50,
+      	"remarks":"零件换"
+      },
+       {
+      	"name":"RFID读卡器",
+      	"number":1,
+      	"unitPrice":100,
+      	"hourCost":50,
+      	"remarks":"零件更换"
+      }]
+      $scope.bylists=angular.copy($scope.byListObj);
+	    angular.forEach($scope.bylists,function(bylist){
+	    	bylist.edit=true;
+	    })
+	   $scope.add=function(mode){
+	   	var temp={
+		   	"name":"",
+	      	"number":null,
+	      	"unitPrice":null,
+	      	"hourCost":null,
+	      	"remarks":"",
+	      	"edit":false
+	   	}
+	   	mode.push(temp);
+
+	   }
+		$scope.delete=function(model,index){
+			model.splice(index,1);
+		}
+    }])
+    
+
+  </script>
+</body>
+</html>
