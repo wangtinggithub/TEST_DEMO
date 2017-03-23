@@ -59,6 +59,35 @@
 										</tr>	 -->						
 			</tbody>
 		</table>
+		<div class="row" style="margin-top:20px;">
+				<div class="col-md-6">
+					<div class="input-group">
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-primary" >维修配件合计金额(元)</button>
+						</div>
+						<input type="text" class="form-control" ng-model="maintain.repairedCost"   placeholder="请输入金额" disabled="disabled">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="input-group">
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-primary">工时费合计金额(元)</button>
+						</div>
+						<input type="text" class="form-control" ng-model="maintain.repairedHourCost"  placeholder="请输入金额" disabled="disabled">
+					</div>
+				</div>
+			</div>
+	</div>
+	<div class="row" style="margin-top:20px;">
+				<div class="col-md-6">
+					<div class="input-group">
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-primary">维修配件合计金额(元)</button>
+						</div>
+						<input type="text" class="form-control" ng-model="maintain.repairedTotalCost"   placeholder="请输入金额" disabled="disabled">
+					</div>
+				</div>
+				
 	</div>
 	 <script>
     var app=angular.module("myapp",[]);
@@ -105,9 +134,31 @@
 		$scope.delete=function(model,index){
 			model.splice(index,1);
 		}
+		$scope.totalPrice=function(model,type){
+		var totalPrice=0;
+		angular.forEach($scope.bylists,function(bylist){
+			if(type==1){
+				totalPrice+=bylist["number"]*bylist["unitPrice"];
+			}else{
+				totalPrice+=bylist["number"]*bylist["hourCost"];
+			}
+		    	
+			
+		    })
+		    return totalPrice;
+}
+		$scope.maintain={};
+		$scope.maintain.repairedCost=$scope.totalPrice($scope.byListObj,1);
+		$scope.maintain.repairedHourCost=$scope.totalPrice($scope.byListObj,2);
+		$scope.maintain.repairedTotalCost=$scope.maintain.repairedCost+$scope.maintain.repairedHourCost;
     }])
-    
+    /*
+    1：计算维修配件合计金额
+    2：工时费合计金额
+    */
+ 
 
   </script>
+
 </body>
 </html>
