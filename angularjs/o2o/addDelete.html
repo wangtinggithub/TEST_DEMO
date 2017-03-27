@@ -37,10 +37,10 @@
 			<tbody>
 				<tr ng-repeat="bylist in bylists" >
 					<td><input type="text" ng-model="bylist.name" ng-disabled="{{bylist.edit}}"></td>
-					<td><input type="number" ng-model="bylist.number" ng-disabled="{{bylist.edit}}"></td>
-					<td><input type="number" ng-model="bylist.unitPrice" ng-disabled="{{bylist.edit}}"></td>
-					<td><input type="text"  value="{{bylist.number*bylist.unitPrice==0?null:bylist.number*bylist.unitPrice}}"  ng-disabled="{{bylist.edit}}"></td>
-					<td><input type="number" ng-model="bylist.hourCost" ng-disabled="{{bylist.edit}}"></td>
+					<td><input type="number" ng-model="bylist.number"  ng-disabled="{{bylist.edit}}" ng-change="calc()"></td>
+					<td><input type="number" ng-model="bylist.unitPrice" ng-disabled="{{bylist.edit}}" ng-change="calc()"></td>
+					<td><input type="text"  value="{{bylist.number*bylist.unitPrice==0?null:bylist.number*bylist.unitPrice}}"   ng-disabled="{{bylist.edit}}"  ></td>
+					<td><input type="number" ng-model="bylist.hourCost"  ng-disabled="{{bylist.edit}}"  ng-change="calc()"></td>
 					<td><input type="text" ng-model="bylist.remarks" ng-disabled="{{bylist.edit}}"></td>
 					<td>
 						<button type="button" class="actualButton" title="删除" ng-click="delete(bylists,$index)">-</button>
@@ -65,7 +65,7 @@
 						<div class="input-group-btn">
 							<button type="button" class="btn btn-primary" >维修配件合计金额(元)</button>
 						</div>
-						<input type="text" class="form-control" ng-model="maintain.repairedCost"   placeholder="请输入金额" disabled="disabled">
+						<input type="text" class="form-control" ng-model="maintain.repairedCost"  placeholder="请输入金额" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -129,28 +129,41 @@
 	      	"edit":false
 	   	}
 	   	mode.push(temp);
+	   	$scope.maintain.repairedCost=$scope.totalPrice($scope.bylists,1);
+		$scope.maintain.repairedHourCost=$scope.totalPrice($scope.bylists,2);
+		$scope.maintain.repairedTotalCost=$scope.maintain.repairedCost+$scope.maintain.repairedHourCost;
+		
 
 	   }
 		$scope.delete=function(model,index){
 			model.splice(index,1);
+			$scope.maintain.repairedCost=$scope.totalPrice($scope.bylists,1);
+			$scope.maintain.repairedHourCost=$scope.totalPrice($scope.bylists,2);
+			$scope.maintain.repairedTotalCost=$scope.maintain.repairedCost+$scope.maintain.repairedHourCost;
+		
 		}
+		$scope.calc=function(){
+		$scope.maintain={};
+		$scope.maintain.repairedCost=$scope.totalPrice($scope.bylists,1);
+		$scope.maintain.repairedHourCost=$scope.totalPrice($scope.bylists,2);
+		$scope.maintain.repairedTotalCost=$scope.maintain.repairedCost+$scope.maintain.repairedHourCost;
+		}
+
 		$scope.totalPrice=function(model,type){
 		var totalPrice=0;
 		angular.forEach($scope.bylists,function(bylist){
 			if(type==1){
 				totalPrice+=bylist["number"]*bylist["unitPrice"];
 			}else{
-				totalPrice+=bylist["number"]*bylist["hourCost"];
+				totalPrice+=bylist["hourCost"];
 			}
 		    	
 			
 		    })
 		    return totalPrice;
 }
-		$scope.maintain={};
-		$scope.maintain.repairedCost=$scope.totalPrice($scope.byListObj,1);
-		$scope.maintain.repairedHourCost=$scope.totalPrice($scope.byListObj,2);
-		$scope.maintain.repairedTotalCost=$scope.maintain.repairedCost+$scope.maintain.repairedHourCost;
+$scope.calc()
+		
     }])
     /*
     1：计算维修配件合计金额

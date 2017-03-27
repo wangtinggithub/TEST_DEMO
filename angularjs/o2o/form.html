@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="../lib/angular.min.js"></script>
+
+</head>
+<body >
+<form name="myForm" ng-init="min = 300; max = 650">
+    Min:
+    <input type="number" ng-model="min" />
+    <br>
+    Max:
+    <input type="number" ng-model="max" />
+    <br>
+    Value:
+    <input type="number" ng-model="value" ng-min="min" ng-max="max" name="value" />
+    <div class="input-help">
+         <h4>The length is outside the current range of acceptable values.</h4>
+    </div>
+    <br> 
+    <tt>value = {{value}}</tt>
+    <br>
+    <tt>value.$valid = {{myForm.value.$valid}}</tt>
+    <br>
+    <tt>value.$error = {{myForm.value.$error}}</tt>
+</form>
+<script>
+    var app = angular.module('myapp', []);
+
+function isEmpty(value) {
+    return angular.isUndefined(value) || value === '' || value === null || value !== value;
+}
+
+app.directive('ngMin', function () {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, elem, attr, ctrl) {
+            scope.$watch(attr.ngMin, function () {
+                ctrl.$setViewValue(ctrl.$viewValue);
+            });
+            var minValidator = function (value) {
+                var min = scope.$eval(attr.ngMin) || 0;
+                if (!isEmpty(value) && value < min) {
+                    ctrl.$setValidity('ngMin', false);
+                    return undefined;
+                } else {
+                    ctrl.$setValidity('ngMin', true);
+                    return value;
+                }
+            };
+
+            ctrl.$parsers.push(minValidator);
+            ctrl.$formatters.push(minValidator);
+        }
+    };
+});
+
+app.directive('ngMax', function () {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, elem, attr, ctrl) {
+            scope.$watch(attr.ngMax, function () {
+                ctrl.$setViewValue(ctrl.$viewValue);
+            });
+            var maxValidator = function (value) {
+                var max = scope.$eval(attr.ngMax) || Infinity;
+                if (!isEmpty(value) && value > max) {
+                    ctrl.$setValidity('ngMax', false);
+                    return undefined;
+                } else {
+                    ctrl.$setValidity('ngMax', true);
+                    return value;
+                }
+            };
+
+            ctrl.$parsers.push(maxValidator);
+            ctrl.$formatters.push(maxValidator);
+        }
+    };
+});
+  </script>
+</body>
+</html>

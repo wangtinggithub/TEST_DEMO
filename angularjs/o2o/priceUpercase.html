@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+  <meta charset="UTF-8">
+  <title>数字金额转中文金额大写</title>
+  <script src="../lib/angular.min.js"></script>
+ 
+
+</head>
+<body ng-controller="myctrl">
+<p>
+  <input type="text" placeholder="请输入金额" ng-model="price"> 
+  <input type="button" value="转化" ng-click="getDigitUppercase(price)">
+</p>
+  <script>
+    var app=angular.module("myapp",[]);
+    app.controller('myctrl', ['$scope',"digitPrice", function($scope,digit){      
+    $scope.getDigitUppercase=function(price){
+      alert(digit.digitUppercase(price));
+    }
+
+    }])
+
+  </script>
+   <script src="digitPrice.js"></script>
+</body>
+</html>
