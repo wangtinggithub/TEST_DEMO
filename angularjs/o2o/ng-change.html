@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>disabled为true是 ng-change事件不触发	</title>
+	<script src="../lib/angular.min.js"></script>
+</head>
+<body>
+<div ng-controller="myctrl">	
+		<input type="text" ng-model="num1" ng-change="total()">
+		<input type="text" ng-model="num2" ng-change="total()">
+		<input type="text" ng-model="totalNum" disabled="true" ng-change="showInfo()">
+		<input type="checkbox" ng-model="check" name="check" ng-change="showInfo()">
+</div>
+<script>
+    var app=angular.module("myapp",[]);
+    app.controller('myctrl', ['$scope', function($scope){
+      $scope.total=function(){
+      	if($scope.check){
+      		 $scope.totalNum=parseInt($scope.num1)+parseInt($scope.num2);
+      		}else{
+      			 $scope.totalNum=0
+      		}
+       
+      }
+      $scope.check=true;
+      $scope.showInfo=function(){
+      	alert($scope.check);
+      }
+    }])
+
+</script>
+</body>
+</html>
