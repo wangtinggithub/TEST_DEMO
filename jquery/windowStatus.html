@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>修改链接显示形式</title>
+	<script src="lib/jquery.js"></script>
+</head>
+<body>
+	<a  class="afflinks" href="http://world.huanqiu.com/article/2017-04/10429665.html?from=bdwz" title="http://world.huanqiu.com/">习近平同芬兰总统尼尼斯托举行会谈</a>
+	<script>
+	$(function(){
+		$(".afflinks").mouseover(function(){
+			window.status=this.title;
+			return false;
+
+		})
+	})
+	</script>
+</body>
+</html>

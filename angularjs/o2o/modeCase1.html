@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>	</title>
+	<script src="../lib/angular.min.js"></script>
+</head>
+<body ng-controller="myctrl">
+	<ul>	
+		<li ng-repeat=" i in lists">
+			{{i}}
+		</li>
+	</ul>
+<script>	
+  var app=angular.module("myapp",[]);
+    app.controller('myctrl', ['$scope', function($scope){
+      $scope.total=function(){
+      	if($scope.check){
+      		 $scope.totalNum=parseInt($scope.num1)+parseInt($scope.num2);
+      		}else{
+      			 $scope.totalNum=0
+      		}
+       
+      }
+      $scope.check=true;
+      $scope.showInfo=function(){
+      	alert($scope.check);
+      }
+    }])
+</script>
+</body>
+
+</html>

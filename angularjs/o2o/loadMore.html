@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>点击加载更多</title>
+	<script src="../lib/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="APP">
+    <h2>angularjs page</h2>
+    <div ng-controller="userController">
+          <div ng-repeat="user in users">
+            {{user.fname}} {{user.lname}}  {{user.zip}} 
+        </div>
+        <div><button ng-click="loadMore(pageNumber,pageSize)" ng-disabled="shopWorkOnLoad">load more</button></div>
+<script>
+	var APP = angular.module('APP', []).
+controller('userController', function ($scope,$http) {
+	 	$scope.pageSize=10;
+    	$scope.pageNumber=1;
+     	$scope.users=[];
+        $scope.loadMore = function(pageSize,pageNumber){
+    	console.log("pageNumber:"+ $scope.pageNumber+" pageSize:"+ $scope.pageSize)
+    	$scope.shopWorkOnLoad=true;
+         $http.jsonp("http://www.filltext.com/?callback=JSON_CALLBACK&rows=10&fname={firstName}&lname={lastName}&zip={zip}").
+    success(function (data) {
+    	if(data.length==0){
+    		alert("没有更多加载数据");
+    	}else{
+    		$scope.pageNumber++;
+    		$scope.users = $scope.users.concat(data);
+       		$scope.shopWorkOnLoad=false;
+    	}   	 
+    	
+      
+    });
+    };
+    $scope.loadMore($scope.pageNumber,$scope.pageSize)
+
+       
+});
+</script>
+
+
+
+</body>
+</html>

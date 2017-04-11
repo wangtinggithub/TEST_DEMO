@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>二元计算符测试</title>
+	<script src="../lib/angular.min.js"></script>
+</head>
+<body>
+	<p>{{test==null?null:test==0?"nan":"nv"}}</p>
+	<script>
+		var app=angular.module("myapp",[]);
+		app.controller('myctrl', ['$scope', function($scope){
+			$scope.show=function(){
+				$scope.test="hahah"
+			}
+
+		}])
+
+	</script>
+</body>
+</html>

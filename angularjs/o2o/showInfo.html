@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>信息提示框</title>
+</head>
+<body>
+<style>
+*{
+	margin: 0px;
+	padding: 0px;
+	font-family: '微软雅黑'
+}
+	.showInfoBox{
+		width: 350px;
+		position: fixed;
+		bottom: 0px;
+		right: 50px;
+
+	}
+	.showInfoBoTitle{
+		height: 36px;
+		line-height: 36px;
+		background: #0987a2;
+		color:white;
+		font-size: 18px;
+		padding:5px 10px;
+    	border-top-left-radius: 6px;
+    	border-top-right-radius: 6px;
+    	font-weight: normal;
+    	letter-spacing: 1px;
+    	position: relative;
+	}
+	.showInfoBoxContent{
+		border:1px solid #0987a2;
+		overflow: hidden;
+	}
+	.showInfoBoxContent p{
+		line-height: 1.5em;
+		padding: 35px 6px;
+		text-align: center;
+		white-space: nowrap;
+		font-size: 16px;
+	}
+	.showInfoBoxContent p i{
+		color:red;
+		margin: 0px 6px;
+		font-style: normal;
+		font-weight: bold;
+	}
+	.showInfoBoxClose{
+		position: absolute;
+		top:8px;
+		right: 14px;
+		width: 30px;
+		height: 30px;
+		text-indent: -9999px;
+		background: url("close.png") 0px 0px no-repeat ;
+		background-size: 100%;
+		border: none;
+	}
+	.showInfoBoxLinks{
+		float: right;
+		margin: 0px 14px 20px;
+    	color: red;
+    	text-decoration: none;
+        letter-spacing: 1px;
+	}
+</style>
+	<div class="showInfoBox">
+		<h3 class="showInfoBoTitle">消息提醒 <button class="showInfoBoxClose">close</button></h3>
+		<div class="showInfoBoxContent">
+			<p>尊敬的用户，您有<i>100</i>条消息未查看!</p>
+			<a href="" class="showInfoBoxLinks">点击查看</a>
+		</div>
+	</div>
+</body>
+</html>

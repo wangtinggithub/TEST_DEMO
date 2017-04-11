@@ -1,0 +1,22 @@
+<div class="indexright_cont_top">
+		<div class="indexright_cont_gs" id="indexright_cont_gs">环卫资讯</div>
+</div>
+<div class="info_con">
+	<div class="envInformation">
+		<div class="envInformation_Box">
+         <uib-tabset active="active" type="tabs">
+             <uib-tab index="$index + 1" ng-repeat="tab in tabs" heading="{{tab.title}}" active="true" disable="tab.disabled">
+                 <!-- {{tab.content}} <p>{{link.content}}</p>-->
+                <div class="envInformation_Title">
+                 	<uib-tabset active="active" type="tabs">
+             			<uib-tab index="$index + 1" select="getContent(this)" ng-repeat="link in tab.links track by $index" heading="{{link.top.substr(5)}}" title="{{link.top}}" active="link.active">
+              				<p id="{{link.htmlId}}">{{link.content}}</p>
+              			</uib-tab>
+		            </uib-tabset>
+		            <div class="addMore" ng-click="loadMore()">more..</div>
+                 </div>
+             </uib-tab>
+         </uib-tabset>
+     </div>
+	</div>
+</div>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>checkbox</title>
+	 <script src="../lib/angular.min.js"></script>
+</head>
+<body ng-controller="myctrl">
+	<ul class="accidentType">
+		<li class="accidentBox">
+			<span>1.人车相撞:</span>
+			<div class="personCar">
+				<input type="checkbox"  ng-model="accidentKind.qs"  value="11"/>
+				<p>轻伤</p>
+			</div>
+			<div class="personCar">
+				<input type="checkbox" ng-model="accidentKind.zy" value="12"/>
+				<p>住院</p>
+			</div>
+			<div class="personCar">
+				<input type="checkbox" ng-model="accidentKind.zs" value="13"/>
+				<p>重伤</p>
+			</div>
+			<div class="personCar">
+				<input type="checkbox" ng-model="accidentKind.bw" value="14"/>
+				<p>病危</p>
+			</div>
+			<div class="personCar">
+				<input type="checkbox" ng-model="accidentKind.sw" value="15"/>
+				<p>死亡</p>
+			</div>
+		</li>
+		<li class="accidentBox">
+			<span>2.车辆本身:</span>
+			<div class="personCar">
+				<input type="checkbox" ng-model="accidentKind.db" value="21"/>
+				<p>颠簸</p>
+			</div>
+			<div class="personCar">
+				<input type="checkbox" ng-model="accidentKind.cz" value="22"/>
+				<p>冲撞</p>
+			</div>
+			<div class="personCar">
+				<input type="checkbox" ng-model="accidentKind.cclw" value="23"/>
+				<p>冲出路外</p>
+			</div>
+			<div class="personCar">
+				<input type="checkbox" ng-model="accidentKind.ljsh" value="24"/>
+				<p>零件损坏</p>
+			</div>
+			<div class="personCar">
+				<input type="checkbox" ng-model="accidentKind.clqt" value="25"/>
+				<p>其他</p>
+			</div>
+		</li>
+		<li class="accidentBox">
+			<span>3.车辆相撞:</span>
+			<div class="personCar">
+				<input type="checkbox" ng-model="accidentKind.cz" value="31"/>
+				<p>擦撞</p>
+			</div>
+			<div class="personCar">
+				<input type="checkbox" ng-model="accidentKind.zz" value="32"/>
+				<p>追撞</p>
+			</div>
+			<div class="personCar">
+				<input type="checkbox" ng-model="accidentKind.clcz" value="33"/>
+				<p>冲撞</p>
+			</div>
+			<div class="personCar">
+				<input type="checkbox" ng-model="accidentKind.zw" value="34"/>
+				<p>追尾</p>
+			</div>
+			<div class="personCar">
+				<input type="checkbox" ng-model="accidentKind.xzqt" value="35"/>
+				<p>其他</p>
+			</div>
+		</li>
+	</ul>
+	<p>{{accidentKind}}</p>
+	<script>
+    var app=angular.module("myapp",[]);
+    app.controller('myctrl', ['$scope', function($scope){
+     $scope.accidentKind={ "zy": true, "cz": true, "zz": true, "clcz": true, "zw": true, "clqt": true }
+    }])
+
+  </script>
+</body>
+</html>
