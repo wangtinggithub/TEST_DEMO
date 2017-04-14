@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+
+		/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  
+::-webkit-scrollbar  
+{  
+    width: 16px;  
+    height: 16px;  
+    background-color: #F5F5F5;  
+}  
+  
+/*定义滚动条轨道 内阴影+圆角*/  
+::-webkit-scrollbar-track  
+{  
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  
+    border-radius: 10px;  
+    background-color: #F5F5F5;  
+}  
+  
+/*定义滑块 内阴影+圆角*/  
+::-webkit-scrollbar-thumb  
+{  
+    border-radius: 10px;  
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);  
+    background-color: #555;  
+}  
+.test{
+
+    scrollbar-base-color: #1C86EE;
+    /*滑块的颜色*/
+  	scrollbar-face-color:#1C86EE; 
+    /*轨道的颜色*/
+    scrollbar-track-color:#052f4f;
+    /*上下箭头的颜色*/
+    scrollbar-arrow-color: white;
+    /*滑块的左右阴影的颜色*/
+    scrollbar-dark-shadow-color:  #1C86EE;
+}
+</style>
+</head>
+<body>
+	<div class="test" style="height: 200px;overflow: auto;">
+		<div style="height:400px;">pppp</div>
+	</div>
+</body>
+</html>
